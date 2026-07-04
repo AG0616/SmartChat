@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+SmartChat
 
-## Getting Started
+AI-powered group chat platform that keeps busy conversations organized using real-time messaging, AI summarization, task extraction, and semantic search.
 
-First, run the development server:
+Problem
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Group chats get messy with hundreds of messages. People miss important discussions, decisions, and tasks. SmartChat uses AI to automatically organize conversations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Real-time Group Chat — WebSocket-based messaging with rooms (Socket.io)
+Person-wise Filter — view messages from a specific person only
+AI Catch-Up Summary — summarize chat by time range using Gemini
+AI Task Extraction — auto-detect and extract tasks from messages
+Smart Search (RAG) — ask natural-language questions (e.g. "who shared the link?") and get AI-generated answers using pgvector similarity search
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+LayerTechnologyFrameworkNext.js 14 (App Router)StylingTailwindCSSAuthNextAuth.js (credentials provider, JWT)DatabasePostgreSQL (Supabase) — raw SQL, no ORMVector Searchpgvector extensionReal-timeSocket.io (separate Node.js server)AIGemini API (@google/generative-ai)DeployVercel (Next.js) + Render (Socket.io server)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
