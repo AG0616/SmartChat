@@ -12,10 +12,8 @@ export  async function POST(req){
     
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
    if (!messages.length) return NextResponse.json({ summary: "No new messages." })
-  // console.log("msg",messages);
   
  const conversation = messages.map((m) => `${m.users?.name}: ${m.content}`) .join("\n");
-
   const prompt = `Summarize this group chat conversation in 4-6 concise bullet points, highlighting key decisions and topics:\n\n${conversation}`;
 
 const summary = await generateText(prompt)

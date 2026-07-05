@@ -29,7 +29,7 @@ export default function Page() {
     const { id } = await res.json()
     setLoading(false)
     setRoomName("")
-    router.push(`/chat/${id}`)  // redirect to room directly
+    router.push(`/chat/${id}`)  
   }
 
   if (status === "loading") return <p className="text-white p-4">Loading...</p>
@@ -70,7 +70,6 @@ export default function Page() {
       ) : (
         <div className="mx-[5%] mt-6 flex flex-col gap-6">
 
-          {/* Join / Create */}
           <div className="bg-white/5 border border-violet-500/20 rounded-2xl p-5 flex flex-col gap-3">
             <h2 className="text-sm font-medium text-violet-300">Join or Create a Room</h2>
             <div className="flex gap-2">
@@ -91,7 +90,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Groups list */}
           <div className="flex flex-col gap-2">
             <h2 className="text-sm text-violet-400">Your Rooms</h2>
             {groups.length === 0 && (

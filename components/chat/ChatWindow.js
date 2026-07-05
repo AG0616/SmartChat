@@ -7,6 +7,7 @@ import MessageInput from "./MessageInput"
 import AIPanel from "../feature/AIpanel"
 import SearchPanel from "../feature/SearchPanel"
 import ChatHeader from "./ChatHeader"
+import PersonFilter from "./PersonFilter"
 
 const EMOJIS = ["😂", "❤️", "🔥", "✨", "💜", "😍", "🎉", "💫", "🌟", "😎", "🥳", "💥", "🎊", "🌈", "💖"]
 
@@ -27,7 +28,7 @@ const FloatingEmojis = memo(function FloatingEmojis() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {emojiData.map((e) => (   // ← emojiData.map not Emojies.map
+      {emojiData.map((e) => (  
         <span key={e.id} style={{
           position: "absolute", left: e.left, top: "-40px",
           fontSize: e.size, opacity: e.opacity,
@@ -44,6 +45,7 @@ export default function ChatWindow({ roomId }) {
   const { data: session } = useSession()
   const [messages, setMessages] = useState([])
     const [activePanel, setActivePanel] = useState(null)
+  const [members,setMembers]=useState([])
 
   const lastSeenAt = useRef(new Date(Date.now() - 24*2 * 60 * 60 * 1000).toISOString())
   const panelOpen = !!activePanel
@@ -62,6 +64,7 @@ export default function ChatWindow({ roomId }) {
       createdAt: m.created_at,
     })))
   })
+    socket.on('room-members', (members) => setMembers(members))
     socket.on("receive-message", (msg) => setMessages((prev) => [...prev, msg]))
 
     return () =>{
@@ -79,27 +82,17 @@ export default function ChatWindow({ roomId }) {
   <div className="relative flex flex-col h-dvh bg-gradient-to-br from-[#0f0a1e] via-[#1a0a2e] to-[#0d1117] font-sans overflow-hidden">
       <FloatingEmojis />
 
-      <ChatHeader
-        roomId={roomId}
-        activePanel={activePanel}
-        onPanel={setActivePanel}
-        onClose={() => setActivePanel(null)}
-      />
+      <ChatHeader  roomId={roomId}   activePanel={activePanel} onPanel={setActivePanel}   onClose={() => setActivePanel(null)} />
 
-      {/* Split body */}
       <div className="relative z-10 flex flex-1 min-h-0">
-
-        {/* Left — chat */}
         <div className={`flex flex-col transition-all duration-300 ${panelOpen ? "w-1/2" : "w-full"}`}>
           <MessageList messages={messages} currentUserId={session?.user?.id} />
           <MessageInput onSend={sendMessage} />
         </div>
 
-        {/* Right — AI / Search panel */}
         {panelOpen && (
           <div className="w-1/2 border-l border-purple-900/40 bg-[#0d0a1a]/80 backdrop-blur flex flex-col transition-all duration-300">
 
-            {/* Tab switcher for AI modes */}
             {(activePanel === "summary" || activePanel === "tasks") && (
               <>
                 <div className="flex border-b border-purple-900/40 shrink-0">
@@ -119,8 +112,12 @@ export default function ChatWindow({ roomId }) {
             )}
 
             {activePanel === "search" && (
-              <SearchPanel roomId={roomId} members={[]} />
+              <SearchPanel roomId={roomId} members={members} />
             )}
+          {activePanel === "filter" && (
+                      <PersonFilter roomId={roomId} myId={session?.user?.id} members={members} />
+                    )}
+
           </div>
         )}
       </div>

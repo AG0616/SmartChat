@@ -15,6 +15,9 @@ export default function registerRoomHandlers(io, socket) {
                       .limit(100)
      if (error) return console.error('fetch messages error:', error)
     socket.emit('previous-messages', data)
+
+       const { data: members } = await supabase.from('room_members') .select('user_id, users(id, name, image)').eq('room_id', roomId)
+       socket.emit('room-members', members?.map(m => m.users))
   })
  
   socket.on("leave-room", ({ roomId }) => {

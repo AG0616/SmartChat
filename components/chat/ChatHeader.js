@@ -27,7 +27,7 @@ export default function ChatHeader({ roomId, activePanel, onPanel, onClose }) {
 
   return (
     <div className="relative z-20 flex items-center gap-3 px-5 py-3 border-b border-purple-900/30 bg-black/40 backdrop-blur-md">
-      {/* Room info */}
+     
       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center text-white font-semibold text-sm shrink-0">
         {roomId[0].toUpperCase()}
       </div>
@@ -36,17 +36,19 @@ export default function ChatHeader({ roomId, activePanel, onPanel, onClose }) {
         <p className="text-violet-400 text-[11px]">SmartChat</p>
       </div>
 
-      {/* Actions */}
+     
       <div className="ml-auto flex items-center gap-2">
-        {/* Live indicator */}
+       
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2" />
 
-        {/* Search */}
+         <button onClick={() => toggle("filter")} className={btnClass("filter")}>
+          🔍 <span>Person Filter</span>
+        </button>
+
         <button onClick={() => toggle("search")} className={btnClass("search")}>
           🔍 <span>Search</span>
         </button>
 
-        {/* AI Features dropdown */}
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setAiOpen(!aiOpen)}
@@ -74,7 +76,6 @@ export default function ChatHeader({ roomId, activePanel, onPanel, onClose }) {
           )}
         </div>
 
-        {/* Close panel */}
         {activePanel && (
           <button onClick={onClose} className="ml-1 text-gray-500 hover:text-white text-lg transition">✕</button>
         )}

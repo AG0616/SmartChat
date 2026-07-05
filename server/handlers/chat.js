@@ -1,21 +1,4 @@
-// import { createClient } from '@supabase/supabase-js'
-// import dotenv from 'dotenv'
-// import { resolve, dirname } from 'path'
-// import { fileURLToPath } from 'url'
 
-// ****
-// IF WE WANT TO RUN FILE FROM SERVER FOLDER THEN IT DOESNT HAVE .ENV AND DOTENV SEARCH THIS FILE INSIDE SERER FOLDER
-// THEREFORE USE PATH TO DEFINE IT ***
-
-// const __dirname = dirname(fileURLToPath(import.meta.url))
-// dotenv.config({ path: resolve(__dirname, '../../.env') })
-
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL,
-//   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
-// )
-// server/index.js
-//await import('dotenv/config')  // ..env will load first now otherwise imports are loaded in any order
 import supabase from '../../lib/db.js'
 import { generateEmbedding } from '../../lib/gemini.js'
 

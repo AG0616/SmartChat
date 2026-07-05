@@ -34,7 +34,7 @@ export default function SearchPanel({ roomId, members }) {
           placeholder='e.g. "what was decided about the deadline?"'
           className="w-full border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 ring-indigo-300 text-white"
         />
-        {/* Person filter inside search */}
+        
         <select
           value={senderId}
           onChange={(e) => setSenderId(e.target.value)}

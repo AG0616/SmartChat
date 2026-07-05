@@ -13,7 +13,6 @@ export default function AIPanel({ mode, roomId, lastSeenAt }) {
   }, [mode])
 
   const fetch_ = async () => {
-    console.log("wlecome to ai panel");
     
     setLoading(true);
     setData(null);
@@ -39,7 +38,7 @@ export default function AIPanel({ mode, roomId, lastSeenAt }) {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Panel header */}
+     
       <div className="px-4 py-3 border-b bg-gray-50">
         <h2 className="font-semibold text-gray-700">
           {isSummary ? "📋 Catch-Up Summary" : "✅ Extracted Tasks"}
@@ -49,7 +48,6 @@ export default function AIPanel({ mode, roomId, lastSeenAt }) {
         </p>
       </div>
 
-      {/* Content */}
       <div className="flex-1 overflow-y-auto p-4">
         {!data && !loading && (
           <div className="flex flex-col items-center justify-center h-full text-center gap-3">
@@ -74,7 +72,7 @@ export default function AIPanel({ mode, roomId, lastSeenAt }) {
         {error && (
           <p className="text-red-400 text-sm text-center mt-4">⚠️ {error}</p>
         )}
-        {/* Summary output */}
+       
         {data && isSummary && (
           <div className="space-y-3">
             <p className="text-xs text-gray-400">{data.messageCount} messages summarized</p>
